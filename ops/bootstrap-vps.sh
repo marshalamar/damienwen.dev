@@ -171,7 +171,7 @@ validate_public_key() {
     die "ssh-keygen could not parse the public key"
 
   TEMP_AUTHORIZED_KEYS="$(mktemp /tmp/damienwen-authorized-keys.XXXXXX)"
-  printf 'command="%s",%s %s\n' \
+  printf 'restrict,command="%s",%s %s\n' \
     "${DISPATCH_SCRIPT_TARGET}" \
     'no-agent-forwarding,no-port-forwarding,no-X11-forwarding,no-user-rc,no-pty' \
     "${public_key}" > "${TEMP_AUTHORIZED_KEYS}"
@@ -227,6 +227,8 @@ create_accounts() {
       "${DEPLOY_USER}"
     log "created deployment user ${DEPLOY_USER}"
   fi
+  [[ "$(id --group --name "${DEPLOY_USER}")" == "${DEPLOY_GROUP}" ]] ||
+    die "${DEPLOY_USER} must use ${DEPLOY_GROUP} as its primary group"
 
   gpasswd --delete "${DEPLOY_USER}" "${APP_GROUP}" > /dev/null 2>&1 || true
   gpasswd --delete "${EXTRACT_USER}" "${APP_GROUP}" > /dev/null 2>&1 || true
@@ -239,7 +241,10 @@ create_accounts() {
 install_authorized_key() {
   local deploy_entry
   local deploy_home
+  local legacy_target
+  local ssh_directory_metadata
   local target
+  local target_metadata
 
   deploy_entry="$(getent passwd "${DEPLOY_USER}")"
   deploy_home="${deploy_entry%:*}"
@@ -250,6 +255,7 @@ install_authorized_key() {
     die "deployment user has an unsafe home directory"
 
   target="${deploy_home}/.ssh/authorized_keys"
+  legacy_target="${deploy_home}/.ssh/authorized_keys2"
   if [[ -L "${deploy_home}/.ssh" ]] ||
     [[ -e "${deploy_home}/.ssh" && ! -d "${deploy_home}/.ssh" ]]; then
     die "${deploy_home}/.ssh must be a real directory"
@@ -257,6 +263,11 @@ install_authorized_key() {
   if [[ -L "${target}" ]] ||
     [[ -e "${target}" && ! -f "${target}" ]]; then
     die "${target} must be a regular file"
+  fi
+  if [[ -e "${legacy_target}" || -L "${legacy_target}" ]]; then
+    die \
+      "${legacy_target} is an unmanaged authentication path;" \
+      "remove it after review before bootstrapping"
   fi
   if [[ -f "${target}" &&
     "$(stat --format='%h' -- "${target}")" != "1" ]]; then
@@ -274,15 +285,30 @@ install_authorized_key() {
   install \
     --directory \
     --owner root \
-    --group root \
-    --mode 0700 \
+    --group "${DEPLOY_GROUP}" \
+    --mode 0750 \
     "${deploy_home}/.ssh"
   install \
     --owner root \
-    --group root \
-    --mode 0600 \
+    --group "${DEPLOY_GROUP}" \
+    --mode 0640 \
     "${TEMP_AUTHORIZED_KEYS}" \
     "${target}"
+
+  ssh_directory_metadata="$(
+    stat --format='%U:%G:%a' -- "${deploy_home}/.ssh"
+  )"
+  [[ "${ssh_directory_metadata}" == "root:${DEPLOY_GROUP}:750" ]] ||
+    die "${deploy_home}/.ssh has unexpected ownership or mode"
+  target_metadata="$(stat --format='%U:%G:%a:%h' -- "${target}")"
+  [[ "${target_metadata}" == "root:${DEPLOY_GROUP}:640:1" ]] ||
+    die "${target} has unexpected ownership, mode, or link count"
+  runuser --user "${DEPLOY_USER}" -- test -r "${target}" ||
+    die "sshd cannot read ${target} as ${DEPLOY_USER}"
+  if runuser --user "${DEPLOY_USER}" -- test -w "${deploy_home}/.ssh" ||
+    runuser --user "${DEPLOY_USER}" -- test -w "${target}"; then
+    die "${DEPLOY_USER} must not be able to replace its forced command"
+  fi
 }
 
 install_app_directories() {

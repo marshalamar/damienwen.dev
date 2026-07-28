@@ -35,9 +35,13 @@ Tunnel's origin remains `http://127.0.0.1:3000`.
   deployment transaction to run `tar`.
 - `damienwen-deploy` owns only `/srv/damienwen/incoming`.
 - The deployment user's home, `.ssh`, and forced `authorized_keys` file are
-  root-owned, so the restricted account cannot replace its forced command.
+  root-owned and not group-writable, so the restricted account can traverse
+  and read its public-key record as required by `sshd` but cannot replace its
+  forced command.
 - The Actions public key has a forced command. It cannot request a shell,
-  forwarding, a PTY, or arbitrary commands.
+  forwarding (including TUN), a PTY, or arbitrary commands. Bootstrap rejects
+  the legacy `authorized_keys2` authentication path and installs the key with
+  OpenSSH's `restrict` option.
 - The root-owned dispatcher accepts exactly:
   `upload-archive <40-sha>`, `upload-checksum <40-sha>`, and
   `deploy <40-sha>`.
@@ -194,11 +198,19 @@ The current website is not stopped or restarted.
 ## GitHub production environment
 
 Create an environment named `production` and restrict its deployment branch to
-`main`. Add at least one trusted reviewer who is not the person or automation
-that pushes releases, enable “Prevent self-review,” and disallow administrator
-bypass. Keep `.github/CODEOWNERS`, and protect `main` with a ruleset that
-requires an approving code-owner review for changes to `.github/workflows/`
-and `ops/`. Do not store production secrets until those controls are active.
+`main`. Prefer at least one trusted reviewer who is not the person or
+automation that pushes releases, enable “Prevent self-review,” and disallow
+administrator bypass. Keep `.github/CODEOWNERS`, and protect `main` with a
+ruleset that requires an approving code-owner review for changes to
+`.github/workflows/` and `ops/`.
+
+For a sole-owner personal repository, after the owner explicitly confirms that
+no second reviewer exists, use the owner as the required reviewer and leave
+“Prevent self-review” off. Keep the `main`-only deployment policy and keep
+`DEPLOY_ENABLED=false` except during an actively supervised manual release.
+This preserves a separate approval click and a normally closed deployment
+switch, but it is not an independent review. Do not store production secrets
+until the applicable protection mode is active.
 
 Then configure:
 

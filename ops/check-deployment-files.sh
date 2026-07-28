@@ -83,7 +83,16 @@ printf -v github_sha_literal '%s%s' '$' '{GITHUB_SHA}'
 grep -Fq "upload-archive ${github_sha_literal}" .github/workflows/deploy.yml
 grep -Fq "upload-checksum ${github_sha_literal}" .github/workflows/deploy.yml
 grep -Fq "deploy ${github_sha_literal}" .github/workflows/deploy.yml
-grep -Fq 'command="%s",%s %s' ops/bootstrap-vps.sh
+grep -Fq 'restrict,command="%s",%s %s' ops/bootstrap-vps.sh
+grep -Fq "must use \${DEPLOY_GROUP} as its primary group" \
+  ops/bootstrap-vps.sh
+grep -Fq 'authorized_keys2' ops/bootstrap-vps.sh
+grep -Fq -- '--mode 0750' ops/bootstrap-vps.sh
+grep -Fq -- '--mode 0640' ops/bootstrap-vps.sh
+grep -Fq "sshd cannot read \${target} as \${DEPLOY_USER}" \
+  ops/bootstrap-vps.sh
+grep -Fq 'must not be able to replace its forced command' \
+  ops/bootstrap-vps.sh
 grep -Fq 'flock --exclusive --nonblock' ops/deploy-release.sh
 grep -Fq 'systemd-run' ops/deploy-release.sh
 grep -Fq 'damienwen-legacy.service' ops/deploy-release.sh

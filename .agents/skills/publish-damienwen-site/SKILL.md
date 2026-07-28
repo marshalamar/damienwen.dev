@@ -77,10 +77,13 @@ Before publishing:
    GitHub secrets.
 4. Do not create a remote repository, change repository visibility, commit,
    push, or alter production unless the user has authorized that action.
-5. Before promising a production deployment, confirm the production
-   environment has independent required-reviewer protection and
-   `DEPLOY_ENABLED` is `true`. If it is absent or false, a push validates the
-   site but deliberately skips the VPS deployment.
+5. Prefer an independent required reviewer with self-review disabled. For a
+   sole-owner personal repository, use the owner as the required reviewer only
+   after the user explicitly confirms that no second reviewer exists. In that
+   mode, restrict the environment to `main`, allow self-review, and keep
+   `DEPLOY_ENABLED=false` whenever no deployment is actively being supervised.
+   If the variable is absent or false, a push validates the site but
+   deliberately skips the VPS deployment.
 6. After the pushed build succeeds, explicitly dispatch `deploy.yml` from
    `main`; do not bypass the environment approval.
 

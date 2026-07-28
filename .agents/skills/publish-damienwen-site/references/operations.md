@@ -65,10 +65,12 @@ releases.
 The build job runs for every push to `main`. The deploy job additionally
 requires an explicit `workflow_dispatch` from `main` and the repository
 variable `DEPLOY_ENABLED` to equal `true`. Production environment secrets
-belong only to that deploy job. The `production` environment must require a
-trusted reviewer other than the release pusher, prevent self-review, and
-disallow bypass. Official Actions must be pinned to immutable full commit
-SHAs.
+belong only to that deploy job. Prefer a trusted reviewer other than the
+release pusher, prevent self-review, and disallow bypass. If the user
+explicitly confirms that this personal repository has no second reviewer, the
+owner may be the required reviewer with self-review enabled; restrict that
+environment to `main` and keep `DEPLOY_ENABLED=false` outside a supervised
+deployment. Official Actions must be pinned to immutable full commit SHAs.
 
 The Actions key is not a general VPS login key. Its dispatcher accepts only
 `upload-archive <sha>`, `upload-checksum <sha>`, and `deploy <sha>`. Expected
