@@ -944,6 +944,122 @@ a {
   line-height: 1.8;
 }
 
+/* —— Essay line sketches (light plate for article body) —— */
+
+.essay-sketch {
+  width: min(640px, 100%);
+  margin: 40px 0 44px;
+  border: 1px solid var(--hairline-bold);
+  background: #fff;
+  color: var(--ink);
+}
+
+.essay-sketch figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.essay-sketch-stage {
+  padding: 8px 12px 4px;
+}
+
+.essay-sketch-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.essay-sketch-caption {
+  margin: 0;
+  padding: 0 18px 16px;
+  color: var(--ink-60);
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.essay-sketch .es-meta {
+  fill: var(--ink-40);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+.essay-sketch .es-label {
+  fill: var(--ink-60);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.essay-sketch .es-label-center {
+  text-anchor: middle;
+}
+
+.essay-sketch .es-rail path,
+.essay-sketch .es-gate path,
+.essay-sketch .es-loop path,
+.essay-sketch .es-doc path,
+.essay-sketch .es-agent path,
+.essay-sketch .es-portable path,
+.essay-sketch .es-ticks path {
+  stroke: rgba(25, 26, 27, 0.28);
+  stroke-width: 1.1;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+.essay-sketch .es-line-strong {
+  stroke: rgba(25, 26, 27, 0.82) !important;
+  stroke-width: 1.6 !important;
+}
+
+.essay-sketch .es-node-soft {
+  fill: rgba(25, 26, 27, 0.35);
+  stroke: none;
+}
+
+.essay-sketch .es-node-ghost {
+  fill: none;
+  stroke: rgba(25, 26, 27, 0.35);
+  stroke-width: 1;
+}
+
+.essay-sketch .es-node-solid {
+  fill: var(--ink);
+  stroke: none;
+}
+
+.essay-sketch .es-plate {
+  fill: #fff;
+  stroke: rgba(25, 26, 27, 0.42);
+  stroke-width: 1.2;
+}
+
+.essay-sketch .es-plate-lg {
+  stroke: rgba(25, 26, 27, 0.55);
+}
+
+.essay-sketch .es-anchor-plate {
+  fill: #fff;
+  stroke: rgba(25, 26, 27, 0.55);
+  stroke-width: 1.2;
+}
+
+.essay-sketch .es-anchor-core {
+  fill: var(--accent);
+}
+
 .article-image {
   width: min(320px, 78vw);
   margin: 40px auto 44px;
@@ -1171,6 +1287,15 @@ a:focus-visible {
   .architecture pre {
     padding: 20px 16px 24px;
     font-size: 11px;
+  }
+
+  .essay-sketch {
+    width: 100%;
+    margin: 32px 0 36px;
+  }
+
+  .essay-sketch-caption {
+    font-size: 12px;
   }
 
   .article-footer {
