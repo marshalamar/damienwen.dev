@@ -1,5 +1,15 @@
 import type { ImgHTMLAttributes, ReactNode } from "react";
 import type { MDXComponents } from "mdx/types";
+import {
+  RamaDualTrackSketch,
+  RamaLocalFileSketch,
+  RamaLoopSketch,
+} from "./rama-sketches";
+import {
+  SkillHarnessSketch,
+  SkillReminderSketch,
+  SkillVolumeSketch,
+} from "./skill-harness-sketches";
 
 type SectionProps = {
   title: string;
@@ -54,4 +64,10 @@ export function ArticleImage({
 export const essayComponents = {
   Section,
   ArticleImage,
+  RamaDualTrackSketch,
+  RamaLoopSketch,
+  RamaLocalFileSketch,
+  SkillVolumeSketch,
+  SkillReminderSketch,
+  SkillHarnessSketch,
 } satisfies MDXComponents;

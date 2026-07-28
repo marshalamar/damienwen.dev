@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "./fonts.css";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://damienwen.dev";
@@ -30,6 +31,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
+      <head>
+        {/* Same-origin only — vendored under public/fonts/zhuque */}
+        <link rel="stylesheet" href="/fonts/zhuque/result.css" />
+      </head>
       <body>{children}</body>
     </html>
   );

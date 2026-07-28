@@ -1,28 +1,62 @@
 import Link from "next/link";
 import { essays } from "../lib/essays";
-import { SiteHeader } from "./site-header";
+import { CoverSketch } from "./cover-sketch";
 
 export default function Home() {
   return (
     <main className="site-shell">
-      <SiteHeader />
-
-      <section className="hero" aria-labelledby="site-title">
-        <div className="hero-heading">
-          <h1 id="site-title">
-            器物
-            <br />
-            与回声
-          </h1>
+      <section className="cover" aria-labelledby="site-title">
+        <div className="cover-grid" aria-hidden="true">
+          <span className="cover-vline" />
+          <span className="cover-vline" />
+          <span className="cover-vline" />
+          <span className="cover-hline" />
+          <span className="cover-hline" />
+          <span className="cover-hline" />
+          <span className="cover-hline" />
+          <span className="cover-hline" />
         </div>
 
-        <aside className="hero-index" aria-label="站点信息">
-          <span>BEIJING · MMXXVI</span>
-        </aside>
+        <header className="cover-header">
+          <a
+            href="https://github.com/marshalamar"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub ↗
+          </a>
+        </header>
 
-        <div className="staff-lines" aria-hidden="true">
-          <span>✦</span>
+        <p className="cover-kicker" aria-label="Damien Wen">
+          <span>Damien Wen</span>
+          <span>
+            Essays
+            <i className="cover-sq" aria-hidden="true" />
+          </span>
+        </p>
+
+        <p className="cover-year">2026</p>
+        <p className="cover-tags">
+          Music, Memory,
+          <br />
+          And Making.
+        </p>
+
+        <div className="cover-figure" aria-hidden="true">
+          <CoverSketch />
         </div>
+
+        <h1 className="cover-title" id="site-title">
+          <span>Objects</span>
+          <span className="cover-title-italic">
+            &amp; Echoes
+            <i className="cover-accent" aria-hidden="true" />
+          </span>
+        </h1>
+
+        <a className="cover-scroll" href="#essays">
+          Index ↓
+        </a>
       </section>
 
       <section
@@ -32,6 +66,9 @@ export default function Home() {
       >
         <div className="section-heading">
           <h2 id="essay-list-title">文章</h2>
+          <span className="section-heading-meta">
+            {String(essays.length).padStart(2, "0")} entries
+          </span>
         </div>
 
         <div className="essay-rows">
