@@ -50,13 +50,13 @@ export default async function EssayPage({ params }: EssayPageProps) {
   const { Content } = essay;
 
   return (
-    <main className="site-shell article-shell">
+    <main className="site-shell site-shell--article">
       <SiteHeader />
 
       <article className="article">
         <header className="article-header">
           <div className="article-number" aria-hidden="true">
-            <span>ESSAY</span>
+            <span>Essay</span>
             <strong>{essay.number}</strong>
           </div>
 
@@ -78,7 +78,7 @@ export default async function EssayPage({ params }: EssayPageProps) {
         </header>
 
         <div className="article-rule" aria-hidden="true">
-          <span>✦</span>
+          <span />
         </div>
 
         <div className="article-body">
