@@ -50,6 +50,11 @@ test("renders the essay index", async () => {
   assert.match(html, /2026\.07\.26/);
   assert.match(html, /2026\.07\.28/);
   assert.match(html, /2026\.07\.29/);
+  assert.deepEqual(essayPathsFrom(html), [
+    "/essays/unreadably-large-skill",
+    "/essays/music-receipt",
+    "/essays/rama-pi-extension",
+  ]);
   assert.doesNotMatch(
     html,
     /这里记录我怎样|两篇关于音乐产品的思考|SHANGHAI|BY DAMIEN WEN|DAMIEN WEN · BEIJING|BEIJING · CHINA|BEIJING · MMXXVI/,

@@ -164,7 +164,14 @@ export const essays: readonly Essay[] = Object.entries(essayModules)
       Content: essayModule.default,
     };
   })
-  .sort((left, right) => Number(left.number) - Number(right.number));
+  .sort((left, right) => {
+    const byDate = right.dateISO.localeCompare(left.dateISO);
+    if (byDate !== 0) {
+      return byDate;
+    }
+
+    return Number(right.number) - Number(left.number);
+  });
 
 export function getEssay(slug: string) {
   return essays.find((essay) => essay.slug === slug);
