@@ -46,8 +46,10 @@ test("renders the essay index", async () => {
   assert.match(html, /Music, Memory/);
   assert.match(html, /我想把听过的音乐记下来/);
   assert.match(html, /一张听歌小票/);
+  assert.match(html, /读不完的 Skill/);
   assert.match(html, /2026\.07\.26/);
   assert.match(html, /2026\.07\.28/);
+  assert.match(html, /2026\.07\.29/);
   assert.doesNotMatch(
     html,
     /这里记录我怎样|两篇关于音乐产品的思考|SHANGHAI|BY DAMIEN WEN|DAMIEN WEN · BEIJING|BEIJING · CHINA|BEIJING · MMXXVI/,
@@ -81,9 +83,11 @@ test("renders every essay linked from the index", async () => {
 
   const ramaHtml = renderedEssays.get("/essays/rama-pi-extension");
   const receiptHtml = renderedEssays.get("/essays/music-receipt");
+  const skillHtml = renderedEssays.get("/essays/unreadably-large-skill");
 
   assert.ok(ramaHtml, "the RAMA essay should remain linked");
   assert.ok(receiptHtml, "the Music Receipt essay should remain linked");
+  assert.ok(skillHtml, "the Skill / Harness essay should remain linked");
 
   assert.match(ramaHtml, /从记忆里再找下一张专辑/);
   assert.match(ramaHtml, /Rate Your Music（RYM）/);
@@ -104,6 +108,14 @@ test("renders every essay linked from the index", async () => {
   assert.match(receiptHtml, /width="640"/);
   assert.doesNotMatch(receiptHtml, /architecture--receipt/);
   assert.doesNotMatch(receiptHtml, /有几件事我会重做/);
+  assert.match(skillHtml, /从体量膨胀看 Harness 存在的必要性/);
+  assert.match(skillHtml, /审查能力没有跟着涨/);
+  assert.match(skillHtml, /往里加提醒走不通/);
+  assert.match(skillHtml, /确定性只剩 Harness/);
+  assert.match(skillHtml, /essay-sketch/);
+  assert.match(skillHtml, /VOLUME GAP/);
+  assert.match(skillHtml, /SAME MATERIAL/);
+  assert.match(skillHtml, /HARNESS BOUNDARY/);
   assert.doesNotMatch(
     ramaHtml,
     /音乐产品不一定还缺一个更强的推荐算法|一个好用的主动 Agent/,

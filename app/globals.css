@@ -1009,7 +1009,8 @@ a {
 .essay-sketch .es-doc path,
 .essay-sketch .es-agent path,
 .essay-sketch .es-portable path,
-.essay-sketch .es-ticks path {
+.essay-sketch .es-ticks path,
+.essay-sketch .es-draw path {
   stroke: rgba(25, 26, 27, 0.28);
   stroke-width: 1.1;
   stroke-linecap: square;

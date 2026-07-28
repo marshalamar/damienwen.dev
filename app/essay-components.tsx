@@ -5,6 +5,11 @@ import {
   RamaLocalFileSketch,
   RamaLoopSketch,
 } from "./rama-sketches";
+import {
+  SkillHarnessSketch,
+  SkillReminderSketch,
+  SkillVolumeSketch,
+} from "./skill-harness-sketches";
 
 type SectionProps = {
   title: string;
@@ -62,4 +67,7 @@ export const essayComponents = {
   RamaDualTrackSketch,
   RamaLoopSketch,
   RamaLocalFileSketch,
+  SkillVolumeSketch,
+  SkillReminderSketch,
+  SkillHarnessSketch,
 } satisfies MDXComponents;

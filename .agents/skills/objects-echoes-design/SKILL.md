@@ -19,7 +19,7 @@ and typography over decoration.
 - Tokens and layout: `app/globals.css`
 - Font imports: `app/fonts.css` (self-hosted; no runtime Google / Zeoseven / jsDelivr CSS)
 - Cover sketch: `app/cover-sketch.tsx`
-- Essay sketches: `app/rama-sketches.tsx` (pattern for future essays)
+- Essay sketches: `app/rama-sketches.tsx`, `app/skill-harness-sketches.tsx`
 - Root layout: `app/layout.tsx`
 
 Read those files before inventing new visual forms. Extend existing classes
