@@ -17,9 +17,10 @@ and typography over decoration.
 ## Source of truth
 
 - Tokens and layout: `app/globals.css`
+- Font imports: `app/fonts.css` (self-hosted; no runtime Google / Zeoseven / jsDelivr CSS)
 - Cover sketch: `app/cover-sketch.tsx`
 - Essay sketches: `app/rama-sketches.tsx` (pattern for future essays)
-- Fonts loaded in: `app/layout.tsx`
+- Root layout: `app/layout.tsx`
 
 Read those files before inventing new visual forms. Extend existing classes
 and components when possible.
@@ -43,16 +44,23 @@ stacks, pill clusters, or card grids in the hero.
 --hairline: rgba(20, 22, 24, 0.12);
 --accent: #34429e;
 --cover: #000;
---serif: Instrument Serif + fallbacks;          /* Latin display */
---title-cn: Zhuque Fangsong + FangSong fallbacks; /* Chinese titles */
---sans: Taipei Sans TC + PingFang / Noto Sans;    /* body + UI */
---mono: JetBrains Mono;                         /* meta / fig labels */
+--serif: Instrument Serif + Songti fallbacks;          /* Latin display */
+--title-cn: Zhuque Fangsong + FangSong fallbacks;      /* Chinese titles */
+--sans: Taipei Sans TC + PingFang / Noto Sans;         /* body + UI */
+--mono: JetBrains Mono;                                /* meta / fig labels */
 --measure: 680px;
 ```
 
-Load webfonts only through the existing layout links (Google Fonts,
-Zeoseven Zhuque, jsDelivr Taipei Sans). Prefer subset/CDN packages already
-in use.
+Fonts ship with the site:
+
+- Latin faces via `@fontsource/*` (latin subsets only — never add Noto Serif SC)
+- Body via `@vp-tw/taipei-sans-tc` Regular CSS
+- Titles via vendored unicode-range files in `public/fonts/zhuque/`,
+  linked from `app/layout.tsx` as `/fonts/zhuque/result.css`
+  Refresh with `npm run fonts:zhuque` when upgrading Zhuque.
+
+Do not reintroduce runtime `<link>` tags to Google Fonts, Zeoseven, or
+jsDelivr for these faces.
 
 ## Typography rules
 

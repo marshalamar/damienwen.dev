@@ -53,6 +53,11 @@ test("renders the essay index", async () => {
     /这里记录我怎样|两篇关于音乐产品的思考|SHANGHAI|BY DAMIEN WEN|DAMIEN WEN · BEIJING|BEIJING · CHINA|BEIJING · MMXXVI/,
   );
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
+  assert.doesNotMatch(
+    html,
+    /fonts\.googleapis\.com|fontsapi\.zeoseven\.com|cdn\.jsdelivr\.net/,
+  );
+  assert.match(html, /\/fonts\/zhuque\/result\.css/);
 });
 
 test("renders every essay linked from the index", async () => {

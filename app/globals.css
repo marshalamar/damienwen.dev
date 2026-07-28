@@ -25,15 +25,12 @@
   --night-ink: #e8e8e6;
   --cyan: #80ebff;
 
-  --serif: "Instrument Serif", "Noto Serif SC", "Source Han Serif SC",
-    "Songti SC", serif;
-  --serif-cn: "Noto Serif SC", "Source Han Serif SC", "Songti SC",
-    "Instrument Serif", serif;
+  --serif: "Instrument Serif", "Songti SC", "STSong", serif;
   --title-cn: "Zhuque Fangsong (technical preview)", "Zhuque Fangsong",
-    "STFangsong", "FangSong", "Noto Serif SC", serif;
+    "STFangsong", "FangSong", "Songti SC", serif;
   --sans: "Taipei Sans TC", "PingFang SC", "Noto Sans SC", "Hanken Grotesk",
     "Helvetica Neue", sans-serif;
-  --mono: "JetBrains Mono", "Chivo Mono", ui-monospace, monospace;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
 
   --page-max: 1280px;
   --measure: 680px;
