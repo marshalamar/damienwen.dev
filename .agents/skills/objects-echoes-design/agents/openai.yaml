@@ -1,0 +1,4 @@
+interface:
+  display_name: "Objects & Echoes Design"
+  short_description: "器物与回声站点视觉语言：封面网格、字体与线稿插图"
+  default_prompt: "Use $objects-echoes-design to keep damienwen.dev visuals on-language."
