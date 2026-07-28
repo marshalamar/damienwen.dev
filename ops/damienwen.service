@@ -1,0 +1,52 @@
+[Unit]
+Description=damienwen.dev standalone web service
+Wants=network-online.target
+Requires=damienwen-recover.service
+After=network-online.target damienwen-recover.service
+ConditionPathExists=/srv/damienwen/current/server.js
+ConditionPathExists=/srv/damienwen/current/.release-tree-sha256
+ConditionPathExists=/srv/damienwen/boot-role
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=damienwen
+Group=damienwen
+WorkingDirectory=/srv/damienwen/current
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=3000
+ExecCondition=/usr/bin/grep --fixed-strings --line-regexp --quiet managed /srv/damienwen/boot-role
+ExecStartPre=/usr/bin/test ! -w /srv/damienwen/current/server.js
+ExecStart=/usr/bin/node /srv/damienwen/current/server.js
+Restart=on-failure
+RestartSec=2
+TimeoutStartSec=30
+TimeoutStopSec=15
+KillSignal=SIGTERM
+UMask=0027
+SyslogIdentifier=damienwen
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+InaccessiblePaths=/srv/damienwen/incoming
+InaccessiblePaths=/srv/damienwen/staging
+InaccessiblePaths=/srv/damienwen/transactions
+ProtectHostname=yes
+ProtectClock=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target

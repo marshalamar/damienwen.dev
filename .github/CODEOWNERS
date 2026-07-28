@@ -1,0 +1,4 @@
+# Production workflow and VPS authority require an explicit owner review.
+/.github/workflows/ @marshalamar
+/ops/ @marshalamar
+/.agents/skills/publish-damienwen-site/ @marshalamar

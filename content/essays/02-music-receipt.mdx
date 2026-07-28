@@ -1,0 +1,30 @@
+export const meta = {
+  title: "一张听歌小票",
+  subtitle: "Music Receipt",
+  excerpt: "把最近七天的听歌记录排成一张可以保存或打印的小票。",
+  publishedAt: "2026-07-28",
+  sourceUrl: "https://github.com/marshalamar/music-receipt",
+};
+
+<Section title="为什么是小票">
+
+我做 Music Receipt，是想用一种好看的方式回顾过去一周听过的歌。购物小票刚好适合：歌曲占一行，播放次数像数量，常听歌手、总时长和流派排在下面。读法不用重新学，扫一眼就知道这周大概在听什么。
+
+<ArticleImage
+  src="/essays/music-receipt/music-receipt.png"
+  alt="Music Receipt 生成的听歌小票，包含近七天播放统计、常听歌曲、常听歌手、流派占比和网易云用户二维码。"
+  width={640}
+  height={1742}
+/>
+
+日期范围就定在七天，一张小票也装得下，不至于变成一份报告。
+
+</Section>
+
+<Section title="生成以后就拿走">
+
+我想把链路做得和购物小票一样短。扫码以后，页面直接生成结果。保存下来，或者打印出来拿走，流程就结束了。
+
+登录前，页面先放一张完整样例，扫码后再换成自己的数据。最后由浏览器导出一张 JPEG。拿到图片，这件事就结束了。
+
+</Section>

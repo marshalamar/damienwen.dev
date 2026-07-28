@@ -1,0 +1,22 @@
+[Unit]
+Description=Recover an interrupted damienwen.dev activation
+After=local-fs.target
+Before=damienwen.service damienwen-legacy.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=root
+Group=root
+ExecStart=/usr/local/sbin/damienwen-recover
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/srv/damienwen
+ReadWritePaths=/etc/systemd/system
+RestrictAddressFamilies=AF_UNIX
+
+[Install]
+WantedBy=multi-user.target

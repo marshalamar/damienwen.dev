@@ -1,0 +1,4 @@
+interface:
+  display_name: "Publish Damien Wen Site"
+  short_description: "新增、校验、发布与回滚 Damien Wen 网站文章"
+  default_prompt: "Use $publish-damienwen-site to add or publish an essay on damienwen.dev."
