@@ -181,6 +181,7 @@ a {
 .cover-hline {
   position: absolute;
   background: var(--cover-grid);
+  transition: background-color 160ms ease;
 }
 
 .cover-vline {
@@ -219,6 +220,52 @@ a {
 }
 .cover-hline:nth-child(8) {
   top: calc(100% - 32px);
+}
+
+.cover-vline.is-sight-line,
+.cover-hline.is-sight-line {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.cover-sight {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.cover-sight-arm {
+  position: absolute;
+  display: block;
+  background: rgba(246, 246, 242, 0.72);
+}
+
+.cover-sight-arm-h {
+  top: 0;
+  left: 0;
+  height: 1px;
+}
+
+.cover-sight-arm-v {
+  top: 0;
+  left: 0;
+  width: 1px;
+}
+
+.cover-sight-core {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 5px;
+  height: 5px;
+  border: 1px solid rgba(246, 246, 242, 0.78);
+  background: rgba(8, 9, 10, 0.55);
+  box-sizing: border-box;
 }
 
 .cover-header {
@@ -292,6 +339,12 @@ a {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--cover-dim);
+  transition: color 180ms ease;
+}
+
+.cover-year.is-sight-lit,
+.cover-tags.is-sight-lit {
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .cover-year {
@@ -365,6 +418,10 @@ a {
   fill: rgba(246, 246, 242, 0.38);
   font-size: 11px;
   letter-spacing: 0.12em;
+}
+
+.cs-meta.is-sight-lit text {
+  fill: rgba(246, 246, 242, 0.72);
 }
 
 .cs-callout {
@@ -1351,6 +1408,24 @@ a:focus-visible {
 
   .cover-sketch .cs-echo-ring {
     transform: none !important;
+  }
+
+  .cover-sight {
+    display: none !important;
+  }
+
+  .cover-vline.is-sight-line,
+  .cover-hline.is-sight-line {
+    background: var(--cover-grid) !important;
+  }
+
+  .cover-year.is-sight-lit,
+  .cover-tags.is-sight-lit {
+    color: var(--cover-dim) !important;
+  }
+
+  .cs-meta.is-sight-lit text {
+    fill: rgba(246, 246, 242, 0.38) !important;
   }
 
   *,

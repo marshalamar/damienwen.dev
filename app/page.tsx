@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { essays } from "../lib/essays";
+import { CoverGridSight } from "./cover-grid-sight";
 import { CoverSketch } from "./cover-sketch";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
           <span className="cover-hline" />
           <span className="cover-hline" />
         </div>
+        <CoverGridSight />
 
         <header className="cover-header">
           <a
