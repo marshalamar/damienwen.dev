@@ -358,6 +358,7 @@ a {
   --cs-strong: rgba(246, 246, 242, 0.78);
   --cs-mid: rgba(246, 246, 242, 0.34);
   --cs-faint: rgba(246, 246, 242, 0.16);
+  --echo-glow: 0;
 }
 
 .cs-meta {
@@ -377,7 +378,7 @@ a {
 }
 
 .cs-echo path {
-  stroke: rgba(246, 246, 242, 0.28);
+  stroke: rgba(246, 246, 242, calc(0.28 + var(--echo-glow) * 0.2));
   stroke-width: 1.1;
   stroke-linecap: square;
 }
@@ -1342,6 +1343,14 @@ a:focus-visible {
   .cover-sketch .cs-anchor-core {
     opacity: 1 !important;
     animation: none !important;
+  }
+
+  .cover-sketch {
+    --echo-glow: 0 !important;
+  }
+
+  .cover-sketch .cs-echo-ring {
+    transform: none !important;
   }
 
   *,
