@@ -70,7 +70,10 @@ release pusher, prevent self-review, and disallow bypass. If the user
 explicitly confirms that this personal repository has no second reviewer, the
 owner may be the required reviewer with self-review enabled; restrict that
 environment to `main` and keep `DEPLOY_ENABLED=false` outside a supervised
-deployment. Official Actions must be pinned to immutable full commit SHAs.
+deployment. In that sole-owner mode, after `gh workflow run deploy.yml`, the
+agent must promptly tell the user to open the Actions run and approve the
+`production` environment; the agent cannot click that approval. Official
+Actions must be pinned to immutable full commit SHAs.
 
 The Actions key is not a general VPS login key. Its dispatcher accepts only
 `upload-archive <sha>`, `upload-checksum <sha>`, and `deploy <sha>`. Expected

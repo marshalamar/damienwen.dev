@@ -86,6 +86,13 @@ Before publishing:
    deliberately skips the VPS deployment.
 6. After the pushed build succeeds, explicitly dispatch `deploy.yml` from
    `main`; do not bypass the environment approval.
+7. Immediately after dispatch, tell the user that the deploy job is waiting on
+   the protected GitHub `production` environment and that they must approve it
+   in the GitHub UI. In the current sole-owner setup the user is the required
+   reviewer; the agent cannot approve. Give them the run URL (for example from
+   `gh run list --workflow=deploy.yml --limit 1` or `gh run watch`) and wait
+   for their approval before treating the release as in progress. Do not
+   silently poll without telling them what is blocked.
 
 Do not edit files directly in the active VPS release. Do not restart
 `cloudflared` during an ordinary article release.
