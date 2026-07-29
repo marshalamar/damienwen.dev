@@ -3,9 +3,9 @@ name: objects-echoes-design
 description: >-
   Apply the Objects & Echoes (器物与回声 / damienwen.dev) visual language:
   black grid cover, light editorial reading chrome, Zhuque Fangsong titles,
-  Taipei Sans body, indigo accent, and white-plate blueprint essay sketches.
-  Use when redesigning pages, styling the cover or article chrome, choosing
-  fonts, or adding essay illustrations / line diagrams for this site.
+  Taipei Sans body, and indigo accent. Use when redesigning pages, styling
+  the cover or article chrome, or choosing fonts for this site. For essay
+  blueprint sketches / line diagrams, use essay-blueprint-sketches instead.
 ---
 
 # Objects & Echoes Design Language
@@ -19,8 +19,8 @@ and typography over decoration.
 - Tokens and layout: `app/globals.css`
 - Font imports: `app/fonts.css` (self-hosted; no runtime Google / Zeoseven / jsDelivr CSS)
 - Cover sketch: `app/cover-sketch.tsx`
-- Essay sketches: `app/rama-sketches.tsx`, `app/skill-harness-sketches.tsx`
 - Root layout: `app/layout.tsx`
+- Essay body diagrams: see `essay-blueprint-sketches`
 
 Read those files before inventing new visual forms. Extend existing classes
 and components when possible.
@@ -31,7 +31,7 @@ and components when possible.
 | --- | --- |
 | Cover | Full-bleed black, architectural grid, large Latin serif brand, sparse mono meta, one indigo mark |
 | Reading | Cool light `#fafafa`, hairline rules, quiet sticky header, measured column |
-| Diagrams in articles | White plates, black/gray lines, mono labels — never dark full-bleed blocks inside light prose |
+| Diagrams in articles | Owned by `essay-blueprint-sketches` (white plates; never dark full-bleed in prose) |
 
 One accent only: indigo `#34429e`. Do not introduce purple gradients, glow
 stacks, pill clusters, or card grids in the hero.
@@ -96,34 +96,17 @@ Motion: short blur/fade/draw-in only; respect `prefers-reduced-motion`.
 - Section numbers via CSS counters; indigo markers
 - Hairline dividers; no ornamental ✦ staff lines
 
-## Essay illustrations (blueprint sketches)
+## Essay illustrations
 
-When an essay needs diagrams:
-
-1. Add SVG React components (see `app/rama-sketches.tsx`).
-2. Register them in `app/essay-components.tsx`.
-3. Place them in MDX near the idea they explain.
-4. Style with `.essay-sketch` — **white background, dark strokes**, indigo
-   figcaption labels (`FIG / 01`), short Chinese caption under the plate.
-
-Sketch grammar:
-
-- Thin strokes, square caps, geometric nodes (circles / diamonds / plates)
-- Mono English labels for structure; Chinese only in the caption
-- One idea per figure; prefer 2–3 figures max per essay
-- Keep viewBox ~640×280; width follows the measure column
-
-Avoid:
-
-- Black/night full-bleed plates inside article body (too abrupt on `#fafafa`)
-- Photos or heavy illustration unless the essay already uses `<ArticleImage />`
-- New accent colors inside diagrams
+Article blueprint sketches are **not** defined here. Use the project skill
+`essay-blueprint-sketches` for SVG line diagrams, FIG labels, sketch CSS, and
+MDX registration.
 
 ## Workflow
 
 1. Confirm the change is visual/layout for this site (not deploy/content ops).
 2. Reuse tokens/classes above; extend rather than fork a second palette.
-3. For new essay diagrams, copy the RAMA sketch shell pattern first.
+3. For new essay diagrams, switch to `essay-blueprint-sketches`.
 4. Preview the affected route locally.
 5. Update `tests/rendered-html.test.mjs` if the homepage or essay chrome
    strings change in a testable way.
@@ -131,5 +114,7 @@ Avoid:
 
 ## Related skills
 
-For essay authoring, images, preview, and VPS publish, use
-`publish-damienwen-site`. This skill only governs visual language.
+- Essay body diagrams / blueprint sketches: `essay-blueprint-sketches`
+- Essay authoring, images, preview, and VPS publish: `publish-damienwen-site`
+
+This skill only governs site-wide visual language (cover, chrome, fonts).

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Essay Blueprint Sketches"
+  short_description: "文章白底蓝图线稿：FIG 标签、几何节点与中文图注"
+  default_prompt: "Use $essay-blueprint-sketches to add or refine essay line diagrams."
