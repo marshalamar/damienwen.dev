@@ -32,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         {/* Same-origin only — vendored under public/fonts/zhuque */}
         <link rel="stylesheet" href="/fonts/zhuque/result.css" />
       </head>
