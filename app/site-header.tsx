@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowIcon } from "./arrow-icon";
 
 export function SiteHeader() {
   return (
@@ -14,7 +15,7 @@ export function SiteHeader() {
           target="_blank"
           rel="noreferrer"
         >
-          GitHub ↗
+          GitHub <ArrowIcon />
         </a>
       </nav>
     </header>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { essays, getEssay } from "../../../lib/essays";
+import { ArrowIcon } from "../../arrow-icon";
 import { essayComponents } from "../../essay-components";
 import { SiteHeader } from "../../site-header";
 
@@ -71,7 +72,7 @@ export default async function EssayPage({ params }: EssayPageProps) {
             <time dateTime={essay.dateISO}>{essay.date}</time>
             {essay.sourceUrl ? (
               <a href={essay.sourceUrl} target="_blank" rel="noreferrer">
-                Source repository ↗
+                Source repository <ArrowIcon />
               </a>
             ) : null}
           </div>
@@ -86,7 +87,9 @@ export default async function EssayPage({ params }: EssayPageProps) {
         </div>
 
         <footer className="article-footer">
-          <Link href="/#essays">← 返回文章列表</Link>
+          <Link href="/#essays">
+            <ArrowIcon direction="left" /> 返回文章列表
+          </Link>
         </footer>
       </article>
     </main>

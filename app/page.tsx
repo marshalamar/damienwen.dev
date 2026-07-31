@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { essays } from "../lib/essays";
+import { ArrowIcon } from "./arrow-icon";
 import { CoverGridSight } from "./cover-grid-sight";
 import { CoverSketch } from "./cover-sketch";
 
@@ -25,7 +26,7 @@ export default function Home() {
             target="_blank"
             rel="noreferrer"
           >
-            GitHub ↗
+            GitHub <ArrowIcon />
           </a>
         </header>
 
@@ -57,7 +58,7 @@ export default function Home() {
         </h1>
 
         <a className="cover-scroll" href="#essays">
-          Index ↓
+          Index <ArrowIcon direction="down" />
         </a>
       </section>
 
@@ -91,7 +92,7 @@ export default function Home() {
                 {essay.date}
               </time>
               <span className="essay-arrow" aria-hidden="true">
-                ↗
+                <ArrowIcon className="essay-arrow-icon" />
               </span>
             </Link>
           ))}
