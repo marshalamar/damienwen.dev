@@ -47,10 +47,13 @@ test("renders the essay index", async () => {
   assert.match(html, /我想把听过的音乐记下来/);
   assert.match(html, /一张听歌小票/);
   assert.match(html, /读不完的 Skill/);
+  assert.match(html, /无之场，场所逻辑下的agent Harness/);
   assert.match(html, /2026\.07\.26/);
   assert.match(html, /2026\.07\.28/);
   assert.match(html, /2026\.07\.29/);
+  assert.match(html, /2026\.08\.03/);
   assert.deepEqual(essayPathsFrom(html), [
+    "/essays/basho-harness",
     "/essays/unreadably-large-skill",
     "/essays/music-receipt",
     "/essays/rama-pi-extension",
@@ -89,10 +92,12 @@ test("renders every essay linked from the index", async () => {
   const ramaHtml = renderedEssays.get("/essays/rama-pi-extension");
   const receiptHtml = renderedEssays.get("/essays/music-receipt");
   const skillHtml = renderedEssays.get("/essays/unreadably-large-skill");
+  const bashoHtml = renderedEssays.get("/essays/basho-harness");
 
   assert.ok(ramaHtml, "the RAMA essay should remain linked");
   assert.ok(receiptHtml, "the Music Receipt essay should remain linked");
   assert.ok(skillHtml, "the Skill / Harness essay should remain linked");
+  assert.ok(bashoHtml, "the basho / harness essay should remain linked");
 
   assert.match(ramaHtml, /从记忆里再找下一张专辑/);
   assert.match(ramaHtml, /Rate Your Music（RYM）/);
@@ -121,6 +126,14 @@ test("renders every essay linked from the index", async () => {
   assert.match(skillHtml, /VOLUME GAP/);
   assert.match(skillHtml, /SAME MATERIAL/);
   assert.match(skillHtml, /HARNESS BOUNDARY/);
+  assert.match(bashoHtml, /包含停在绝对无/);
+  assert.match(bashoHtml, /模型是有，harness 是无/);
+  assert.match(bashoHtml, /作用是腾空/);
+  assert.match(bashoHtml, /互相成就/);
+  assert.match(bashoHtml, /essay-sketch/);
+  assert.match(bashoHtml, /PLACE CHAIN/);
+  assert.match(bashoHtml, /BEING \/ NOTHING/);
+  assert.match(bashoHtml, /CO-CONSTITUTION/);
   assert.doesNotMatch(
     ramaHtml,
     /音乐产品不一定还缺一个更强的推荐算法|一个好用的主动 Agent/,

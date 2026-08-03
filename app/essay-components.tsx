@@ -6,6 +6,11 @@ import {
   RamaLoopSketch,
 } from "./rama-sketches";
 import {
+  BashoBeingNothingSketch,
+  BashoContainmentSketch,
+  BashoMutualSketch,
+} from "./basho-sketches";
+import {
   SkillHarnessSketch,
   SkillReminderSketch,
   SkillVolumeSketch,
@@ -70,4 +75,7 @@ export const essayComponents = {
   SkillVolumeSketch,
   SkillReminderSketch,
   SkillHarnessSketch,
+  BashoContainmentSketch,
+  BashoBeingNothingSketch,
+  BashoMutualSketch,
 } satisfies MDXComponents;
