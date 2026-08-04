@@ -47,7 +47,8 @@ test("renders the essay index", async () => {
   assert.match(html, /我想把听过的音乐记下来/);
   assert.match(html, /一张听歌小票/);
   assert.match(html, /读不完的 Skill/);
-  assert.match(html, /无之场，场所逻辑下的agent Harness/);
+  assert.match(html, /无之场/);
+  assert.match(html, /场所逻辑下的 Agent Harness/);
   assert.match(html, /2026\.07\.26/);
   assert.match(html, /2026\.07\.28/);
   assert.match(html, /2026\.07\.29/);
@@ -127,6 +128,7 @@ test("renders every essay linked from the index", async () => {
   assert.match(skillHtml, /SAME MATERIAL/);
   assert.match(skillHtml, /HARNESS BOUNDARY/);
   assert.match(bashoHtml, /包含停在绝对无/);
+  assert.match(bashoHtml, /场所逻辑下的 Agent Harness/);
   assert.match(bashoHtml, /模型是有，harness 是无/);
   assert.match(bashoHtml, /作用是腾空/);
   assert.match(bashoHtml, /互相成就/);
