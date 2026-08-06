@@ -274,7 +274,9 @@ a {
   top: 0;
   right: 0;
   left: 0;
-  padding: 28px max(28px, var(--edge)) 0;
+  padding: max(28px, calc(env(safe-area-inset-top, 0px) + 12px))
+    max(28px, var(--edge), calc(env(safe-area-inset-right, 0px) + 12px)) 0
+    max(28px, var(--edge), calc(env(safe-area-inset-left, 0px) + 12px));
   display: flex;
   justify-content: flex-end;
 }
@@ -296,8 +298,12 @@ a {
 .cover-kicker {
   position: absolute;
   z-index: 3;
-  top: 29px;
-  left: max(28px, var(--edge));
+  top: max(29px, calc(env(safe-area-inset-top, 0px) + 13px));
+  left: max(
+    28px,
+    var(--edge),
+    calc(env(safe-area-inset-left, 0px) + 12px)
+  );
   margin: 0;
   display: flex;
   flex-direction: column;
