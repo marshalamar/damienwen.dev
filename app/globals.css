@@ -333,6 +333,10 @@ a {
   background: #fff;
 }
 
+.cover-lede {
+  display: contents;
+}
+
 .cover-year,
 .cover-tags {
   position: absolute;
@@ -807,13 +811,19 @@ a {
   vertical-align: unset;
 }
 
-.essay-row:hover .essay-row-title {
-  transform: translateX(6px);
+@media (hover: hover) and (pointer: fine) {
+  .essay-row:hover .essay-row-title {
+    transform: translateX(6px);
+  }
+
+  .essay-row:hover .essay-arrow {
+    transform: translate(3px, -3px);
+    color: var(--accent-bright);
+  }
 }
 
-.essay-row:hover .essay-arrow {
-  transform: translate(3px, -3px);
-  color: var(--accent-bright);
+.essay-row:active {
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
 }
 
 /* —— Article —— */
@@ -951,6 +961,7 @@ a {
   font-weight: 400;
   letter-spacing: 0.01em;
   line-height: 1.32;
+  scroll-margin-top: 80px;
 }
 
 .article-section-copy > p,
@@ -1201,49 +1212,81 @@ a:focus-visible {
 }
 
 @media (max-width: 720px) {
+  :root {
+    --edge: max(20px, env(safe-area-inset-left, 0px));
+    --edge-right: max(20px, env(safe-area-inset-right, 0px));
+    --edge-top: max(16px, env(safe-area-inset-top, 0px));
+    --edge-bottom: max(20px, env(safe-area-inset-bottom, 0px));
+  }
+
   .site-header {
-    padding-inline: 20px;
+    padding: max(14px, env(safe-area-inset-top, 0px)) var(--edge-right) 14px
+      var(--edge);
+  }
+
+  .site-header nav a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding-inline: 4px;
   }
 
   .cover-kicker {
-    left: 20px;
+    top: calc(12px + env(safe-area-inset-top, 0px));
+    left: var(--edge);
     font-size: 16px;
   }
 
   .cover-header {
-    padding-inline: 20px;
+    padding: calc(12px + env(safe-area-inset-top, 0px)) var(--edge-right) 0
+      var(--edge);
   }
 
-  .cover-year,
-  .cover-tags {
-    left: 20px;
+  .cover-header a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
+  /* Mobile cover: brand + one line. Sketch/year stay desktop-only. */
+  .cover-figure,
   .cover-year {
-    top: auto;
-    bottom: 120px;
-  }
-
-  .cover-tags {
-    top: auto;
-    bottom: 72px;
-    transform: none;
+    display: none;
   }
 
   .cover-title {
-    left: 20px;
-    bottom: 180px;
-    font-size: clamp(48px, 14vw, 72px);
+    top: auto;
+    right: var(--edge-right);
+    bottom: max(120px, calc(18vh + env(safe-area-inset-bottom, 0px)));
+    left: var(--edge);
+    font-size: clamp(52px, 15vw, 76px);
   }
 
-  .cover-figure {
-    top: 12%;
-    right: 20px;
-    left: 20px;
-    width: auto;
-    max-width: 280px;
-    margin-inline: auto;
-    opacity: 0.85;
+  .cover-lede {
+    position: absolute;
+    z-index: 3;
+    top: auto;
+    bottom: max(72px, calc(10vh + env(safe-area-inset-bottom, 0px)));
+    left: var(--edge);
+    right: auto;
+    display: block;
+  }
+
+  .cover-tags {
+    position: static;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    transform: none;
+    font-size: 12px;
+  }
+
+  .cover-scroll {
+    right: var(--edge-right);
+    bottom: max(28px, env(safe-area-inset-bottom, 0px));
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .cover-vline:nth-child(2),
@@ -1255,7 +1298,8 @@ a:focus-visible {
   }
 
   .essay-list {
-    padding-inline: 20px;
+    padding: 0 var(--edge-right) max(72px, env(safe-area-inset-bottom, 0px))
+      var(--edge);
     background: var(--bg);
   }
 
@@ -1300,13 +1344,9 @@ a:focus-visible {
     height: 17px;
   }
 
-  .essay-row:hover .essay-row-title {
-    transform: none;
-  }
-
   .article-header {
     min-height: 0;
-    padding: 56px 20px 40px;
+    padding: 56px var(--edge-right) 40px var(--edge);
     display: block;
   }
 
@@ -1337,11 +1377,11 @@ a:focus-visible {
 
   .article-rule {
     height: 56px;
-    padding-inline: 20px;
+    padding-inline: var(--edge) var(--edge-right);
   }
 
   .article-body > section {
-    padding: 48px 20px;
+    padding: 48px var(--edge-right) 48px var(--edge);
     display: block;
   }
 
@@ -1357,7 +1397,7 @@ a:focus-visible {
 
   .article-section-copy > p,
   .article-section-copy > ul {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.8;
   }
 
@@ -1368,7 +1408,7 @@ a:focus-visible {
 
   .architecture pre {
     padding: 20px 16px 24px;
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .essay-sketch {
@@ -1376,16 +1416,43 @@ a:focus-visible {
     margin: 32px 0 36px;
   }
 
-  .essay-sketch-caption {
+  .essay-sketch figcaption {
     font-size: 12px;
   }
 
+  .essay-sketch .es-meta,
+  .essay-sketch .es-label {
+    font-size: 12px;
+  }
+
+  .essay-sketch-caption {
+    font-size: 13px;
+  }
+
   .article-footer {
-    padding-inline: 20px;
+    padding: 48px var(--edge-right)
+      max(48px, env(safe-area-inset-bottom, 0px)) var(--edge);
   }
 
   .site-shell--article {
     background: var(--bg);
+  }
+}
+
+@media (max-width: 720px) and (max-height: 700px) {
+  .cover-title {
+    bottom: max(96px, calc(14vh + env(safe-area-inset-bottom, 0px)));
+    font-size: clamp(46px, 14vw, 64px);
+  }
+
+  .cover-lede {
+    bottom: max(56px, calc(8vh + env(safe-area-inset-bottom, 0px)));
+  }
+}
+
+@media (pointer: coarse) {
+  .cover-sight {
+    display: none !important;
   }
 }
 

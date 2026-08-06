@@ -55,8 +55,8 @@ export function BashoContainmentSketch() {
             CUP
           </text>
 
-          <circle className="es-node-solid" cx="188" cy="168" r="18" />
-          <text className="es-label es-label-center" x="188" y="172">
+          <circle className="es-node-solid" cx="188" cy="156" r="16" />
+          <text className="es-label es-label-center" x="188" y="190">
             WATER
           </text>
         </g>
@@ -224,11 +224,11 @@ export function BashoMutualSketch() {
           <path d="M400 112 L412 120 L400 128" pathLength={1} />
 
           <rect className="es-plate" x="428" y="72" width="168" height="112" />
-          <circle className="es-node-solid" cx="512" cy="116" r="22" />
-          <text className="es-label es-label-center" x="512" y="120">
+          <circle className="es-node-solid" cx="512" cy="112" r="18" />
+          <text className="es-label es-label-center" x="512" y="148">
             MODEL
           </text>
-          <text className="es-label es-label-center" x="512" y="164">
+          <text className="es-label es-label-center" x="512" y="168">
             IN PLACE
           </text>
 

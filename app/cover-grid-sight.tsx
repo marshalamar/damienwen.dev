@@ -4,6 +4,7 @@
  * Drafting-style sight at cover grid intersections.
  * Faint crosshair when the pointer nears a vline×hline crossing;
  * nearest mono labels step up one brightness notch.
+ * Disabled for reduced motion and coarse (touch) pointers.
  */
 
 import { useEffect, useRef } from "react";
@@ -60,8 +61,10 @@ export function CoverGridSight() {
     const cover = sight.closest(".cover");
     if (!(cover instanceof HTMLElement)) return;
 
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let reduced = media.matches;
+    const reduceMedia = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const coarseMedia = window.matchMedia("(pointer: coarse)");
+    let reduced = reduceMedia.matches;
+    let coarse = coarseMedia.matches;
     let intersections = collectIntersections(cover);
     let lastPointer: { x: number; y: number } | null = null;
     let activeV: HTMLElement | null = null;
@@ -92,6 +95,8 @@ export function CoverGridSight() {
       hide();
     };
 
+    const inactive = () => reduced || coarse;
+
     const updateLabels = (ix: number, iy: number, coverRect: DOMRect) => {
       clearLabels();
       const labels = cover.querySelectorAll(".cover-year, .cover-tags, .cs-meta");
@@ -108,7 +113,7 @@ export function CoverGridSight() {
     };
 
     const applySight = (clientX: number, clientY: number) => {
-      if (reduced || intersections.length === 0) {
+      if (inactive() || intersections.length === 0) {
         hide();
         return;
       }
@@ -149,7 +154,7 @@ export function CoverGridSight() {
     };
 
     const onPointerMove = (event: PointerEvent) => {
-      if (reduced) return;
+      if (inactive()) return;
       lastPointer = { x: event.clientX, y: event.clientY };
       applySight(event.clientX, event.clientY);
     };
@@ -159,7 +164,7 @@ export function CoverGridSight() {
     };
 
     const onScroll = () => {
-      if (reduced || !lastPointer) return;
+      if (inactive() || !lastPointer) return;
       intersections = collectIntersections(cover);
       const rect = cover.getBoundingClientRect();
       const inside =
@@ -180,14 +185,16 @@ export function CoverGridSight() {
       else hide();
     };
 
-    const syncReduced = () => {
-      reduced = media.matches;
-      if (reduced) release();
+    const syncPrefs = () => {
+      reduced = reduceMedia.matches;
+      coarse = coarseMedia.matches;
+      if (inactive()) release();
     };
 
     hide();
-    syncReduced();
-    media.addEventListener("change", syncReduced);
+    syncPrefs();
+    reduceMedia.addEventListener("change", syncPrefs);
+    coarseMedia.addEventListener("change", syncPrefs);
     cover.addEventListener("pointermove", onPointerMove);
     cover.addEventListener("pointerleave", onPointerLeave);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -196,7 +203,8 @@ export function CoverGridSight() {
     window.visualViewport?.addEventListener("scroll", onScroll);
 
     return () => {
-      media.removeEventListener("change", syncReduced);
+      reduceMedia.removeEventListener("change", syncPrefs);
+      coarseMedia.removeEventListener("change", syncPrefs);
       cover.removeEventListener("pointermove", onPointerMove);
       cover.removeEventListener("pointerleave", onPointerLeave);
       window.removeEventListener("scroll", onScroll);

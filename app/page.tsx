@@ -38,12 +38,14 @@ export default function Home() {
           </span>
         </p>
 
-        <p className="cover-year">2026</p>
-        <p className="cover-tags">
-          Music, Memory,
-          <br />
-          And Making.
-        </p>
+        <div className="cover-lede">
+          <p className="cover-year">2026</p>
+          <p className="cover-tags">
+            Music, Memory,
+            <br />
+            And Making.
+          </p>
+        </div>
 
         <div className="cover-figure" aria-hidden="true">
           <CoverSketch />
